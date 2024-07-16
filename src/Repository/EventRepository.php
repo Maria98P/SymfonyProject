@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Repository;
+
+use App\Entity\Event;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+
+/**
+ * @extends ServiceEntityRepository<Event>
+ */
+class EventRepository extends ServiceEntityRepository
+{
+    public function __construct(ManagerRegistry $registry)
+    {
+        parent::__construct($registry, Event::class);
+    }
+
+
+    public function findAllEventTypes(): array
+    {
+        $queryBuilder = $this->createQueryBuilder('e')
+            ->select('e.type')
+            ->distinct(true);
+    
+        $results = $queryBuilder->getQuery()->getArrayResult();
+        
+       
+        return array_map(function ($result) {
+            return $result['type'];
+        }, $results);
+    }
+ 
+}

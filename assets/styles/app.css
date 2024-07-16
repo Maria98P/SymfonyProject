@@ -1,0 +1,12 @@
+:root {
+    --main-bg-color: #ECF0F1;
+   
+    --extra-color:#1abc9c;
+  }
+
+body {
+    background-color:var(--main-bg-color) ;
+}
+#button{
+  background-color:var(--extra-color);
+}

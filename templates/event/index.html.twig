@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+{% block body %}
+    <style> 
+  
+
+body, h1, h3 {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #2C3E50; 
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #3498db, #8e44ad); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align:center;
+}
+
+
+
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2C3E50; 
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #3498db, #8e44ad); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    text-align:center;
+    
+}
+    
+    #content {
+        height: 400px;
+        padding: 5px;
+    }
+
+    .buttons {
+        margin-bottom:10%;
+        display:flex;
+        justify-content: flex-end;
+        gap:1px;
+    }
+
+  .carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    display: block; 
+     background: linear-gradient(135deg, #3498db, #8e44ad);
+    margin-top:30px;
+  
+}
+
+.carousel-item img {
+    max-width: 50%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+    box-shadow:10px 10px inset grey;
+}
+    </style>
+
+    <div class="container"> 
+        <h1>Find events!</h1>
+        <h3>Welcome to your real-time gateway to world events. Discover and explore the latest happenings from every corner of the globe, all in one place. 
+        <br>
+        Stay informed, stay connected.</h3>
+
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+            {% for event in events %}
+            <div class="p-3">
+                <div class="card" style="width: 18rem;" id="content">
+                    <img src="{{ asset('images/' ~ event.image) }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.name }}</h5>
+                        <p class="card-text"><i class="bi bi-calendar-event"></i> {{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</p>
+                        <div class="buttons">
+                            <a href="{{ path('app_event_show', {'id': event.id}) }}" class="btn" id="button"><i class="bi bi-info"></i></a>
+                            <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn" id="button"><i class="bi bi-pencil"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>No records found</p>
+            {% endfor %}
+        </div>
+ </div>
+        <div class="carousel-container">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/images/c1.jpg" class="d-block w-50" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/c2.jpg" class="d-block w-50" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="/images/c3.jpg" class="d-block w-50" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+   
+{% endblock %}

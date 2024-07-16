@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+<style> 
+
+* {box-sizing: border-box}
+body{
+    background-image: url("/images/bg.jpg");
+}
+#relative{
+    position:relative;
+}
+#button{
+    width: 100%;
+    position: absolute;
+    bottom:0;
+    right:0;
+
+   
+   
+}
+#relative:hover .overlay {
+  opacity: 1;
+}
+#box{
+    position:relative;
+}
+#content{
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, 5%);
+
+}
+
+
+</style>
+<div class="container"  id="box">
+    <div class="card"  id="content" >
+    <div id="relative">
+      <a class="btn"  id="button" href="{{ path('app_event_filter', {'type': event.type}) }}" >{{event.type}}</a>
+    <img src="{{ asset('images/' ~ event.image) }}" class="card-img-top" alt="...">
+       </div> 
+        <div class="card-body">
+            <h5 class="card-title">{{ event.name }}</h5>
+        
+            <p class="card-text"> {{ event.description }}</p> 
+            <h5> When?  </h5> 
+            <p class="card-text"> {{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</p>
+            <h5> Where?  </h5> 
+            <p class="card-text"> {{ event.addressLocation }} {{ event.addressStreetName }} {{ event.addressStreetNumber }} {{ event.addressZipCode }}</p>
+          
+            <p class="card-text">  Capacity: {{ event.capacity }} <i class="bi bi-people-fill"></i></p> 
+
+            <h5> Contact  </h5> 
+            <p class="card-text"> <i class="bi bi-envelope"></i> {{ event.email }}</p>                       
+            <p class="card-text"> <i class="bi bi-telephone"></i> {{ event.phoneNumber }}</p> 
+            <p class="card-text">  {{ event.url }}</p> 
+
+
+            
+
+            <div class="container text-center">
+                <div class=" row g-2"> 
+           
+                    
+                    <a href="{{ path('app_event_index') }}"class="btn" id="button">back to list</a> 
+
+                    <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn" id="button">edit</a>
+                    
+                    {{ include('event/_delete_form.html.twig') }}
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+    
+      
+   
+
+    
+{% endblock %}
