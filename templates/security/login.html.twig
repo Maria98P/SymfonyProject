@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sign In{% endblock %}
+
+{% block body %}
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #3498db, #8e44ad); /* Background gradient */
+    font-family: Arial, sans-serif;
+}
+
+
+#container{
+    display:block;
+    width:100%;
+    margin-bottom: 30px;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    backdrop-filter: blur(10px); /* Blur effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Border for the glass look */
+}
+
+.form-container h2 {
+    color: #fff; /* White text color */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-container label {
+    color: #fff; /* White text color */
+    margin-top: 10px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-container input[type="email"],
+.form-container input[type="password"] {
+    background: rgba(255, 255, 255, 0.2); /* Semi-transparent input background */
+    color: #fff; /* White text color */
+}
+
+.form-container input::placeholder {
+    color: #eee; /* Light placeholder color */
+}
+
+.form-container input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.3); /* Slightly darker background on focus */
+}
+
+
+
+.form-container #bt {
+   
+   color: #fff;
+    background-color: var(--extra-color); /* White text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+   display:block;
+   width:100%;
+ 
+}
+.form-container #bt:hover{
+     background-color: #18927a;
+}
+
+
+
+
+</style>
+
+<div class="form-container">
+    <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+    <form method="post">
+        <label for="inputEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" required autofocus placeholder="Email address">
+        
+        <label for="inputPassword">Password</label>
+        <input type="password" name="password" id="inputPassword" autocomplete="current-password" required placeholder="Password">
+        
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+      
+        
+        <button class="btn btn-lg" id="bt" type="submit">Sign in</button>
+    </form>
+</div>
+{% endblock %}

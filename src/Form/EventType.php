@@ -6,6 +6,10 @@ use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Service\FileUploader;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EventType extends AbstractType
 {
@@ -17,7 +21,30 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('description',null ,["attr" => ["class" => "form-control"]])
-            ->add('image',null ,["attr" => ["class" => "form-control"]])
+            
+            
+            ->add('image', null, ["attr" => ["class" => "form-control"]], [
+                'label' => 'Upload Picture',
+
+                'mapped' => false,
+
+                'required' => false,
+ 
+
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/png',
+                            'image/jpeg',
+                            'image/jpg',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid image file',
+                    ])
+                ],
+            ])
+ 
+          //  ->add('image',null ,["attr" => ["class" => "form-control"]])
             ->add('capacity',null ,["attr" => ["class" => "form-control"]])
             ->add('email',null ,["attr" => ["class" => "form-control"]])
             ->add('phoneNumber',null ,["attr" => ["class" => "form-control"]])

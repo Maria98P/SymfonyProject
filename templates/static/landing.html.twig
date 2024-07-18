@@ -1,0 +1,194 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event index{% endblock %}
+
+{% block body %}
+    <style> 
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+body{
+     overflow-x: hidden;
+}
+        h1 {
+            font-size: 3em;
+            font-weight: bold;
+            color: #2C3E50; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #3498db, #8e44ad); 
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align:center;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2C3E50; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #3498db, #8e44ad); 
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            text-align:center;
+        }
+
+        #content {
+            height: 300px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1px;
+        }
+
+        #pic {
+            height: 200px;
+            object-fit: cover;
+        }
+
+.footer{
+    margin-top:-50px;
+}
+
+#image-track{
+    display: flex;
+    gap: 4vmin;
+ 
+    left: 10%;
+    top: 50%;
+background-color: var(--det);
+    transform: translate(0%, -50%);
+    user-select: none;
+    padding: 2vh;
+    margin-top:200px;
+    margin-bottom: 100px;
+}   
+
+.card{
+    
+    width: 30vw;
+    height: 60vh;
+
+}
+#image-track > .card > #pic{
+    width: 30vw;
+    height: 60vh;
+    object-fit:cover;
+   
+    position: relative
+    ;
+    overflow: hidden
+    ;
+    
+}
+
+
+
+
+
+    </style>
+
+
+    <div class="container"> 
+        <h1>Find events!</h1>
+        <h3>Welcome to your real-time gateway to world events. Discover and explore the latest happenings from every corner of the globe, all in one place. 
+        <br>
+        Stay informed, stay connected.</h3>
+
+
+<div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+ 
+            {% for event in events %}
+            <div class="p-3">
+                <div class="card" style="width: 18rem;" id="content">
+                    <img src="{{ asset('images/' ~ event.image) }}" id="pic" draggable="false"  class="card-img-top" alt="...">
+                    <div class="card-body" id="cbody">
+                        <h5 class="card-title" id="ctitle">{{ event.name }}</h5>
+                       
+                      
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <p>No records found</p>
+            {% endfor %}
+        
+</div>
+
+
+
+       
+ </div>
+       
+
+<script>
+    
+    const track = document.getElementById("image-track");
+
+    const handleOnDown= function (e){
+        track.dataset.mouseDownAt = e.clientX;
+    }
+    
+    const handleOnUp = function (){
+        track.dataset.mouseDownAt= "0";
+        track.dataset.prevPercentage = track.dataset.percentage;
+    }
+
+
+    const handleOnMove = function (e){
+        if(track.dataset.mouseDownAt === "0") {
+        return;}
+
+        const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+        maxDelta = window.innerWidth /2;
+        const percentage = (mouseDelta/ maxDelta)* -100,
+        nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+        nextPercentage= Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+        track.dataset.percentage= nextPercentage;
+
+            track.animate({
+                transform: `translate(${nextPercentage}%, -50%)`
+            },
+            {duration: 1200, fill:"forwards"});
+            
+
+           
+
+            if (window.innerWidth < 1000) {
+            for (const image of track.getElementsByClassName("image")) {
+                image.animate({
+                    objectPosition: `${100 + nextPercentage}% center`
+                }, { duration: 1200, fill: "forwards" });
+            }
+        }
+           
+        
+
+    }
+
+
+    window.onmousedown = function (e){
+        handleOnDown(e)
+    }
+    window.ontouchstart = e => handleOnDown(e.touches[0]);
+
+window.onmouseup = e => handleOnUp(e);
+
+window.ontouchend = e => handleOnUp(e.touches[0]);
+
+window.onmousemove = e => handleOnMove(e);
+
+window.ontouchmove = e => handleOnMove(e.touches[0]);
+
+    
+    </script>
+   
+{% endblock %}

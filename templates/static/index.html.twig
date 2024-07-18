@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StaticController!{% endblock %}
+
+{% block body %}
+<style>
+h1, h3 {
+    padding: 2vh;
+    font-size: 1em; /* Font size for h1 */
+    font-weight: bold;
+    color: #2C3E50; 
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #3498db, #8e44ad); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Different sizes for h1 and h3 */
+h1 {
+    font-size: 4em;
+    text-align: center;
+}
+h3{
+    text-align:center;
+}
+
+#flex{
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+h1:hover{
+    
+    margin-top: -30px;
+	transition: 0.5s ease-in-out;
+}
+
+</style>
+<div id="flex"> 
+<h1> G</h1>
+<h1> o</h1>
+<h1> o</h1>
+<h1> d</h1>
+<h1> b </h1>
+<h1>y</h1>
+<h1>e </h1>
+
+
+ </div>
+<h3> You have successfully logged out. We hope to see you again soon!</h3>
+
+
+{% endblock %}

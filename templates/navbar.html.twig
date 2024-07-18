@@ -16,10 +16,20 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{{ path('app_event_index') }}" >Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link"  href="{{ path('app_event_new') }}" >Create a new event</a>
+   {% if is_granted('ROLE_USER') ==false %}
+    <li class="nav-item">
+              <a class="nav-link"  href="{{ path('app_register') }}" >Register</a>
+            </li>
+
+         <li class="nav-item">
+          <a class="nav-link"  href="{{ path('app_login') }}" >Login</a>
         </li>
-        <li class="nav-item dropdown">
+ {%  endif %}
+
+
+        {% if is_granted('ROLE_USER')  %}
+
+         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Find events based on their type:
           </a>
@@ -34,6 +44,25 @@
             {% endfor %}
           </ul>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link"  href="{{ path('app_logout') }}" >Logout</a>
+        </li>
+        {%  endif %}
+
+
+         {% if is_granted('ROLE_ADMIN')  %}
+         
+        <li class="nav-item">
+          <a class="nav-link"  href="{{ path('app_event_new') }}" >Create a new event</a>
+        </li>
+       
+
+       
+         {%  endif %}
+       
+        
+       
       </ul>
     </div>
   </div>
