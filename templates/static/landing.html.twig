@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Event index{% endblock %}
-
+   
 {% block body %}
+
     <style> 
         * {
             margin: 0;
@@ -12,28 +13,6 @@
 body{
      overflow-x: hidden;
 }
-        h1 {
-            font-size: 3em;
-            font-weight: bold;
-            color: #2C3E50; 
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #3498db, #8e44ad); 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align:center;
-        }
-
-        h3 {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #2C3E50; 
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #3498db, #8e44ad); 
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            text-align:center;
-        }
 
         #content {
             height: 300px;
@@ -89,19 +68,62 @@ background-color: var(--det);
     ;
     
 }
+.header-image {
+  background-image: url("/images/header.jpeg"); /* Replace with path to your image */
+  background-size: cover;
+  background-position: center;
+  padding: 10vh; /* Adjust height as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers content vertically within the header */
+  text-align: center; /* Centers text horizontally within the header */
+  color: white; /* Ensures text is visible */
+  margin-bottom:5vh;
+}
+.titles{
+      background: rgba(0, 0, 0, 0.5);
+      padding:2vh;
+      display:block;
+      width:100%;
+}
 
 
 
+h2 {
+            font-size: 3em;
+            font-weight: bold;
+            color: white; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #7fb3d5, #d2a6d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align:center;
+        }
 
+h4 {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white; 
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #7fb3d5, #d2a6d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            text-align:center;
+        }
 
     </style>
 
-
-    <div class="container"> 
-        <h1>Find events!</h1>
-        <h3>Welcome to your real-time gateway to world events. Discover and explore the latest happenings from every corner of the globe, all in one place. 
+<div class="header-image">
+    <div class="titles"> 
+        <h2>Find events!</h1>
+        <h4>Welcome to your real-time gateway to world events. Discover and explore the latest happenings from every corner of the globe, all in one place. 
         <br>
         Stay informed, stay connected.</h3>
+</div>
+</div>
+    
+    
 
 
 <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">

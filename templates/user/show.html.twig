@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+<style> 
+
+* {
+    box-sizing: border-box;
+    
+}
+
+
+#relative {
+    position: relative;
+}
+
+#button {
+    width: 100%;
+}
+
+#buttonType{
+    width: 100%;
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--extra-color); /* Semi-transparent background */
+    color: white; /* Text color */
+    text-align: center; /* Center the text */
+    padding: 10px; /* Padding for better look */
+    
+}
+
+#relative:hover .overlay {
+    opacity: 1;
+}
+
+#box {
+    position: relative;
+}
+
+#content {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translate(-50%, 5%);
+}
+
+.card-body {
+    position: relative;
+}
+
+.card-body .buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.card-body .buttons-container a,
+.card-body .buttons-container form {
+    flex: 1;
+    text-align: center;
+}
+
+.card-body .buttons-container form {
+    margin: 0;
+    padding: 0;
+}
+
+.footer{
+    margin-top:1200px;
+}
+
+</style>
+
+<div class="container" id="box">
+    <div class="card" id="content">
+        <div id="relative">
+            <a class="btn" id="buttonType" href="{{ path('app_event_filter', {'type': event.type}) }}">{{ event.type }}</a>
+            <img src="{{ asset('images/' ~ event.image) }}" class="card-img-top" alt="...">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ event.name }}</h5>
+            <p class="card-text">{{ event.description }}</p>
+            <h5>When?</h5>
+            <p class="card-text">{{ event.dateTime ? event.dateTime|date('Y-m-d H:i:s') : '' }}</p>
+            <h5>Where?</h5>
+            <p class="card-text">{{ event.addressLocation }} {{ event.addressStreetName }} {{ event.addressStreetNumber }} {{ event.addressZipCode }}</p>
+            <p class="card-text">Capacity: {{ event.capacity }} <i class="bi bi-people-fill"></i></p>
+            <h5>Contact</h5>
+            <p class="card-text"><i class="bi bi-envelope"></i> {{ event.email }}</p>
+            <p class="card-text"><i class="bi bi-telephone"></i> {{ event.phoneNumber }}</p>
+            <p class="card-text">{{ event.url }}</p>
+
+            <div class="buttons-container">
+                <a href="{{ path('app_user_index') }}" class="btn" id="button">Back to list</a>
+               
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -6,6 +6,10 @@
 parameters:
     pictures_directory: '%kernel.project_dir%/public/images'
 services:
+    App\Security\LoginSuccessHandler:
+        class: App\Security\LoginSuccessHandler  # Assuming your handler class location
+        arguments:
+            $router: '@router'
 
     App\Security\CustomAuthenticationEntryPoint:
         arguments:
@@ -28,7 +32,8 @@ services:
     App\Service\FileUploader:
        arguments:
            $targetDirectory: '%kernel.project_dir%/public/images'
-    
+
+   
     App\Entity\User:
            
 
