@@ -49,8 +49,8 @@ class EventController extends AbstractController
        
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $imageFile = $form->get('image')->getData();
-            if ($imageFile) {
+           $imageFile = $form->get('image')->getData();
+            if ($imageFile) { 
                 $imageFileName =$fileUploader->upload($imageFile);
             $event->setImage($imageFileName);}
 
@@ -77,12 +77,16 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_event_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) { 
+                $imageFileName =$fileUploader->upload($imageFile);
+            $event->setImage($imageFileName);}
             $entityManager->flush();
 
             return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);

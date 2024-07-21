@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+
+<style> 
+h1{
+    text-align:center;
+}
+</style>
+    <h1>Edit User</h1>
+
+    {{ include('account/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+
+
+{% endblock %}

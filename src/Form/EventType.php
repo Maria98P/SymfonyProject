@@ -23,7 +23,7 @@ class EventType extends AbstractType
             ->add('description',null ,["attr" => ["class" => "form-control"]])
             
             
-            ->add('image', null, ["attr" => ["class" => "form-control"]], [
+            ->add('image', FileType::class,  [
                 'label' => 'Upload Picture',
 
                 'mapped' => false,
@@ -39,9 +39,12 @@ class EventType extends AbstractType
                             'image/jpeg',
                             'image/jpg',
                         ],
+                        
                         'mimeTypesMessage' => 'Please upload a valid image file',
                     ])
                 ],
+                'data_class' => null,
+                "attr" => ["class" => "form-control"],
             ])
  
           //  ->add('image',null ,["attr" => ["class" => "form-control"]])

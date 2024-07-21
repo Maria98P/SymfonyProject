@@ -33,7 +33,7 @@ body {
 
 h1, h3 {
   padding: 2vh;
-  font-size: 1em; /* Font size for h1 */
+  font-size: 1em;
   font-weight: bold;
   color: #2C3E50; 
   margin-bottom: 20px;
@@ -43,7 +43,7 @@ h1, h3 {
 }
 
 .footer {
-  margin-top: 100px; /* Adjust based on footer height */
+  margin-top: 100px;
 }
 
 .registration-form {

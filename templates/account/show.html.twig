@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+
+<style>
+
+
+h1{
+    text-align:center;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.card{
+    align-self: center;
+   
+}
+
+#button{
+     width:100%;
+}
+
+</style>
+<div class="flex">
+    <h1>{{ user.username }}</h1>
+ <div class="card" style="width: 18rem;">
+  {% if user.image %}
+            <img src="{{ asset('images/' ~ user.image) }}" class="card-img-top" >
+
+        {% else %}
+         <img src="{{ asset('images/default.webp') }}" class="card-img-top">
+        {% endif %} 
+  <div class="card-body">
+    <h5 class="card-title">Email: </h5>
+    <p class="card-text">{{ user.email }}</p>
+      <h5 class="card-title">Username: </h5>
+    <p class="card-text">{{ user.username }}</p>
+    <a href="{{ path('app_account_edit')}}" class="btn" id="button">Edit</a>
+  </div>
+</div>
+  
+           
+ 
+
+
+ </div>
+
+
+{% endblock %}
